@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.petmatch"
+    namespace = "com.valhalla.petmatchgi"
     compileSdkVersion 33
     buildToolsVersion "33.0.0"  // Optional but good to specify
 
