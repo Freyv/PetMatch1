@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "778440537102",
+    "project_id": "petmatch-24069",
+    "storage_bucket": "petmatch-24069.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778440537102:android:984165f037f9ff6583385f",
+        "android_client_info": {
+          "package_name": "com.valhalla.petmatch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvcbNGKxAFZDK4RObefyfNmlIeIlNuli4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
