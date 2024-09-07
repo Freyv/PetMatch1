@@ -1,7 +1,14 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'dev.flutter.flutter-gradle-plugin'
-apply plugin: 'com.google.gms.google-services'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'com.google.gms.google-services' // Apply Google services plugin
+    id 'dev.flutter.flutter-gradle-plugin' // Apply Flutter plugin
+}
+
+// Now load keystoreProperties here
+def keystorePropertiesFile = rootProject.file("key.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     namespace = "com.valhalla.petmatchgi"
@@ -43,11 +50,6 @@ android {
     }
 }
 
-// Load keystore properties
-def keystorePropertiesFile = rootProject.file("key.properties")
-def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:33.2.0')
     implementation 'com.google.firebase:firebase-auth'
@@ -57,6 +59,3 @@ dependencies {
 flutter {
     source = "../.."
 }
-
-// Apply the Google services plugin at the end
-apply plugin: 'com.google.gms.google-services'
