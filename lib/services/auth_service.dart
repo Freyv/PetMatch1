@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 class AuthService extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  late Rx<User?> _firebaseUser; // Permite User? (nulo)
+  late Rx<User?> _firebaseUser; // Allows nullable User
   var userIsAuthenticated = false.obs;
 
   @override
@@ -17,16 +17,16 @@ class AuthService extends GetxController {
     _firebaseUser = Rx<User?>(_auth.currentUser);
     _firebaseUser.bindStream(_auth.authStateChanges());
 
-    ever(_firebaseUser, (User? user) { // Usa User? para lidar com valores nulos
+    ever(_firebaseUser, (User? user) {
       userIsAuthenticated.value = user != null;
     });
   }
 
-  User? get user => _firebaseUser.value; // Permite User? (nulo)
+  User? get user => _firebaseUser.value; // Allows nullable User
   static AuthService get to => Get.find<AuthService>();
 
   Future<void> definirTime(Time time) async {
-    final userId = _firebaseUser.value?.uid; // Permite User? (nulo)
+    final userId = _firebaseUser.value?.uid; // Allows nullable User
     if (userId == null) {
       showSnack('Erro', 'Usuário não autenticado.');
       return;
@@ -38,7 +38,7 @@ class AuthService extends GetxController {
         'time_nome': time.nome,
       });
     } catch (e) {
-      showSnack('Erro ao definir time', e.toString()); // Corrige a mensagem de erro
+      showSnack('Erro ao definir time', e.toString());
     }
   }
 
@@ -59,7 +59,7 @@ class AuthService extends GetxController {
         password: password,
       );
     } catch (e) {
-      showSnack('Erro ao registrar!', e.toString()); // Corrige a mensagem de erro
+      showSnack('Erro ao registrar!', e.toString());
     }
   }
 
@@ -70,7 +70,7 @@ class AuthService extends GetxController {
         password: password,
       );
     } catch (e) {
-      showSnack('Erro no Login!', e.toString()); // Corrige a mensagem de erro
+      showSnack('Erro no Login!', e.toString());
     }
   }
 
@@ -78,7 +78,7 @@ class AuthService extends GetxController {
     try {
       await _auth.signOut();
     } catch (e) {
-      showSnack('Erro ao sair!', e.toString()); // Corrige a mensagem de erro
+      showSnack('Erro ao sair!', e.toString());
     }
   }
 }
