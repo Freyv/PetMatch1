@@ -5,10 +5,14 @@ plugins {
     id 'dev.flutter.flutter-gradle-plugin' // Apply Flutter plugin
 }
 
-// Now load keystoreProperties here
+// Load keystore properties
 def keystorePropertiesFile = rootProject.file("key.properties")
 def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+} else {
+    println("WARNING: 'key.properties' file not found. Ensure it exists to sign your APK.")
+}
 
 android {
     namespace = "com.valhalla.petmatchgi"
@@ -34,10 +38,14 @@ android {
 
     signingConfigs {
         release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
+            if (keystoreProperties['keyAlias'] && keystoreProperties['storeFile']) {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            } else {
+                println("WARNING: Release keystore properties not configured.")
+            }
         }
     }
 
