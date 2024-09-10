@@ -49,6 +49,3 @@ dependencies {
 flutter {
     source = "../.." // Make sure this path points correctly to the Flutter project
 }
-
-// Apply the Google services plugin at the bottom
-apply plugin: 'com.google.gms.google-services'
