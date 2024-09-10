@@ -1,27 +1,24 @@
 plugins {
-    id "dev.flutter.flutter-plugin-loader" version "1.0.0"
-    id "com.android.application" version "8.1.0"
-    id "com.google.gms.google-services" version "4.3.15"
-    id "org.jetbrains.kotlin.android" version "1.7.10"  // Consider upgrading if needed
+    id "com.android.application"
     id "kotlin-android"
-    id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
 }
 
 android {
-    namespace = "com.valhalla.petmatchgi" // Ensure AGP version is 7.2.0 or higher to use this
+    namespace = "com.valhalla.petmatchgi"
     compileSdkVersion 33
+    buildToolsVersion "33.0.0"
 
     defaultConfig {
         applicationId = "com.valhalla.petmatch"
         minSdkVersion 21
-        targetSdkVersion 34
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
     }
 
     buildTypes {
         release {
-            // Code and resource shrinking enabled
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -39,13 +36,13 @@ android {
 }
 
 dependencies {
-    // Firebase BoM manages versions of Firebase libraries
     implementation platform('com.google.firebase:firebase-bom:33.2.0')
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-firestore'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.10"
 }
 
 flutter {
-    source = "../.." // Make sure this path points correctly to the Flutter project
+    source = "../.."
 }
+
+apply plugin: 'com.google.gms.google-services'
